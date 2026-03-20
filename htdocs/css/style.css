@@ -1,0 +1,81 @@
+/* AIに書かせたCSS */
+body{
+  margin:0;
+  font-family:sans-serif;
+  background:#f5f8ff;
+  color:#333;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px;
+}
+/*
+・display:flex　これで子要素が「横並び」「中央揃えが簡単になる」
+・align-items: center;　FlexboxやGridで縦方向に中央揃えするプロパティです。
+使う場所は Flexbox や CSS Grid Layout のコンテナ
+*/
+.logo{
+  font-size:24px;
+}
+
+nav ul{
+  display:flex;
+  list-style:none;
+}
+/* list-style:noneはリスクのマーカーを消すキー */
+nav li{
+  margin-left:20px;
+}
+
+nav a{
+  text-decoration:none;
+  color:#333;
+}
+
+.hero img{
+  width:100%;
+  height:400px;
+object-fit: contain;
+}
+/* object-fit: cover;  画像の表示方法を調整（画像の比率を保ったまま枠いっぱいに表示する（はみ出る部分は切り取る）） */
+
+/* .hero img{
+  width:100%;
+  height:400px;
+  object-fit:cover;
+} */
+
+section{
+  padding:60px;
+}
+
+h2{
+  text-align:center;
+  margin-bottom:40px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+}
+/*
+display:grid;　Gridレイアウトを使う宣言
+grid-template-columns: repeat(4,1fr);　4列のグリッドを作る（全部同じ幅）
+fr = fraction
+余ったスペースを分割
+*/
+
+
+.grid img{
+  width:100%;
+  border-radius:10px;
+}
+
+footer{
+  text-align:center;
+  padding:30px;
+}

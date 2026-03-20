@@ -1,0 +1,155 @@
+@charset "UTF-8";
+/* 日本語が文字化けしないように宣言 @charsetは宣言するという意味*/
+
+html,body{
+    height: 100%;
+    /* htmlとbodyの内容を途中で見切れないようにしている */
+    /*これ書かないと中身が少ない場合bodyが途中までしかのびない*/
+}
+body {
+    color:  #060606;
+    background-color: #B3DBEA;
+    font-size:  16px;
+    font-family:  "Meiryo"
+}
+p{
+    color: #0E3E8F;
+    font-weight: bold;
+}
+/***********header*********************************************************************/
+/*
+画像が見切れている/背景がない切り抜きされている画像使う
+*/
+header{
+    position:fixed;
+    /* position無いとtopとright機能しない */
+    top:0;
+    right:0;
+    height: 60px;
+    width:auto;
+    display: flex;
+    justify-content: flex-end; /* 右寄せ */
+    align-items: center;       /* 縦中央 */
+    padding-right: 16px;    /*内側の右余白*/
+    z-index: 100; /*重なり順 要素が大きいほど上に表示される*/
+
+    /* 右寄せ */
+}
+
+.header-right svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+/* SVGにサイズを与える */
+
+.click_header{
+    display: flex;
+    gap: 16px; /* 画像同士の間隔 */
+    /* absoluteて何 */
+    /* width: 100px; 画像サイズの調整 */
+    height: auto;   /*画像サイズの調整*/
+    /* top/left/bottom/rightはpositionが指定されている要素にしか効かない */
+}
+.click_header img {
+  max-width: 100%;
+  height:40px;
+}
+/* 画像の縦横比を保ったまま、親要素に収める 設定。 */
+
+*/
+/*********************************************************************************/
+main{
+    display: flex;
+    flex-direction: column; /* 中身（猫と料理）を縦に並べる */
+    align-items: center;    /* 中身を左右中央に寄せる */
+    min-height: 100vh;
+    margin-top: 60px;
+}
+.Parentcatmain{
+    min-height: 100vh;
+}
+
+.Parentcatmain.catmain{
+    width: 100%;
+    /* 画面の高さからヘッダー分を引いた高さで中央に置く */
+    min-height: calc(100vh - 60px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* positionは「基準をどこに置いてどう配置するか」を設定するプロパティ */
+
+.marusize{
+    width: 400px;
+    height: auto;
+    /* transform や top などの絶対配置プロパティは書かない */
+}
+
+
+/*********************************************************************************/
+.menu_eleven{
+    background-color: #fff;
+    position: fixed;
+    /* 要素をブラウザ画面を基準に固定 */
+    padding: 2rem 1.2rem;
+    /* paddingの省略記法 */
+    /* padding:要素の中身と枠線との間の隙間をつくるプロパティ */
+    left: 4vw;
+    width: 14rem;
+    border-radius:1.3rem;
+    /* radius = 半径 */
+    top: 3vw;   /* headerの高さ分 */
+    transform-origin: 0% 0%;
+    font-weight: bold;
+    color: #0E3E8F;
+}
+
+.eleven{
+    font-size:  35px;
+}
+.menu{
+    font-size: 30px;
+    line-height: 1.8;
+ /* 行と行の間の高さ（行間）を指定するCSSプロパティ */
+}
+/*********************************************************************************/
+
+/* display: flex; これで横並びにできる画像のときは使えそう */
+
+.cooking_picture{
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;    /* 端までいったら下へ画像配置 */
+}
+.cooking_picture img{
+    margin:10px;
+    width:"664";
+    height:"415";
+}
+
+
+
+/*********************************************************************************/
+footer{
+    position: fixed;
+    bottom: 0%;
+}
+
+
+
+
+
+/* memo
+調べること
+・コメントアウトの方法くらい統一すればいいのに出来ない理由とかあるのかな
+・CSSでタグを指定するときもう参照されてるhtmlから選択しが出るようにできないのかなぁ
+.displayとpositionタグの違い
+
+    display: flex;
+    親要素にてdisplay:flex;の指定で子要素を横並びが可能
+    Flexコンテナー（親要素）の中にFlexアイテム（子要素）をつくる
+
+mainがflexだと下へのスクロールが出来なくなる
+*/
+

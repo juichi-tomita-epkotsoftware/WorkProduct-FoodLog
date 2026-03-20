@@ -1,0 +1,39 @@
+SET CHARACTER_SET_CLIENT=utf8;
+SET CHARACTER_SET_CONNECTION=utf8;
+
+-- -- cri_sortable
+-- DROP DATABASE IF EXISTS `cri_sortable`;
+-- CREATE DATABASE `cri_sortable`;
+-- -- cri_sortable.sortable
+-- CREATE TABLE `cri_sortable`.`sortable` (
+--   `id` int unsigned NOT NULL AUTO_INCREMENT,
+--   `name` text NOT NULL,
+--   `left_x` int unsigned DEFAULT NULL,
+--   `top_y` int unsigned DEFAULT NULL,
+--   `gender_id` tinyint(1) NOT NULL,
+--   PRIMARY KEY (`id`)
+-- ) ENGINE=InnoDB;
+-- INSERT INTO `cri_sortable`.`sortable` (`id`,`name`,`left_x`,`top_y`,`gender_id`) VALUES
+--  ("1","新垣結衣","810","56","2")
+-- ,("2","北川景子","631","302","2")
+-- ,("3","佐々木希","788","326","2")
+-- ,("4","本田翼","79","150","2")
+-- ,("5","平愛梨","590","96","2")
+-- ,("6","戸田恵梨香","389","410","2")
+-- ,("7","宮﨑あおい","222","91","2")
+-- ,("8","桜井日奈子","824","170","2")
+-- ,("9","山田孝之","79","150","1")
+-- ,("10","佐藤健","452","93","1")
+-- ,("11","成宮寛貴","422","263","1")
+-- ,("12","綾野剛","229","320","1")
+-- ;
+-- -- cri_sortable.genders
+-- CREATE TABLE `cri_sortable`.`genders` (
+--   `id` tinyint(1) NOT NULL AUTO_INCREMENT,
+--   `gender` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+--   PRIMARY KEY (`id`)
+-- ) ENGINE=InnoDB;
+-- INSERT INTO `cri_sortable`.`genders` (`id`,`gender`) VALUES
+--  ("1","男性")
+-- ,("2","女性")
+-- ;
