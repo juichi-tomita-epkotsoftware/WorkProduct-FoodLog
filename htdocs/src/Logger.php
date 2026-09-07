@@ -3,7 +3,7 @@ namespace App\Src;
 
 class Logger{
 public static function write(string $type,string $message):void
-//第一引数ではログの種類$typeを指定 ex.[IMAGE]や[CREATE]など
+//第一引数ではログの種類($type)を指定 ex.[IMAGE]や[CREATE]など
 //第二引数ではログ内容$messageを指定
 {
   $timestamp =  date('Y-m-d H:i:s');
