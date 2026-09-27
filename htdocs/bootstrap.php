@@ -1,36 +1,36 @@
 <?php
-use App\Repository\MealRepository;
+use App\Repository\MealRepository;  //useはこのファイル限定のショートカット設定
 
-require_once __DIR__ . '/src/Database.php';
-require_once __DIR__ . '/src/MealRepositoryInterface.php';
-require_once __DIR__ . '/src/MealRepository.php';
-require_once __DIR__ . '/src/ImageUploader.php';
-require_once __DIR__ . '/src/Logger.php';
-require_once __DIR__ . '/src/MealController.php';
-/**
- *  クラス化した他ファイル(srcフォルダ内ファイル)を読み込む
- * 　※require_onceは関数ではなく言語構造(echoなどと同種)
- */
+require_once __DIR__ . '/src/Database.php'; //DB接続クラス
+require_once __DIR__ . '/src/MealRepositoryInterface.php';  //インターフェイスファイルは先に読み込み
+require_once __DIR__ . '/src/MealRepository.php';   //SQL処理クラス
+require_once __DIR__ . '/src/ImageUploader.php';    //画像を保存するクラス
+require_once __DIR__ . '/src/Logger.php';   //ログファイルへ追記するクラス
+require_once __DIR__ . '/src/MealController.php';   //POST内のキーをみて振り分ける
 
-$env = parse_ini_file('.env');  //.envファイルを読み込み、PHPの配列に変換する組み込み関数
-define("DB_DNS", "mysql:host={$env['DB_HOST']};dbname={$env['DB_NAME']};charset=utf8");
+$env = parse_ini_file(__DIR__.'/.env');  //.envファイルを読み込み、PHPの配列に変換する組み込み関数
+
+define("DB_DNS", "mysql:host={$env['DB_HOST']};dbname={$env['DB_NAME']};charset=utf8mb4");
 define("DB_USER", $env['DB_USER']);
 define("DB_PASSWORD",$env['DB_PASSWORD']);
-/**
- * DB情報を定数として定義
- *
- * 参考
- * define:定数を定義する  ※define("定数名",値);
- * PSRにより定数名は全て大文字にする
- * Laravelではdefine関数使わず.envファイルで情報管理する
- */
+
+//  * Laravelではdefine関数使わず.envファイルで情報管理する
 
 $dbh = Database::getInstance();
-/**
- * DB接続(自作のクラスを使用)
- * newをしない理由：Databaseクラスは不可を減らすためインスタンスを１つしか作らせない設計がされているため。
- * ※staticメソッドのためインスタンス不要で::で関数呼べる。
- */
-$repo = new MealRepository($dbh); //$dbhという状態を持たせるからインスタンス化
-$uploader = new ImageUploader ;   //クラス内のコンストラクトで定義された引数を状態に持つためインスタンス化
-$ctrl = new MealController($repo,$uploader);  //$repoと$uploaderという状態を持たせるためnewでインスタンス化
+
+
+$repo = new MealRepository($dbh); //SQLの窓口
+$uploader = new ImageUploader ; //画像を保存する
+$ctrl = new MealController($repo,$uploader);
+
+function html(string|int|float|null $str): string {
+    return htmlspecialchars((string)$str, ENT_QUOTES, 'UTF-8');
+}
+
+function prg(string $url):void{
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $sep = str_contains($url, '?') ? '&' : '?';
+    header("Location: {$url}{$sep}redirect=true");
+    exit;}
+}
+

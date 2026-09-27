@@ -76,14 +76,13 @@ Class MealRepository
         $stmt->execute();
     }
 
-    /** */
     public function findById(int $id): ?array
     {
         $stmt = $this->dbh->prepare('SELECT * FROM meals WHERE id = :id');
         $stmt ->bindValue(':id',$id,PDO::PARAM_INT);
         $stmt ->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result ?: null; //見つからなければnullを返す
+        return $result ?: null;
     }
 }
 

@@ -4,7 +4,6 @@ CSSの一般的な並べ方の考え方は「大きい・土台 → 小さい・
 
   １．リセット・ベース：これ書かないと要素が想定より大きくなるバグが起きやすい
 
-::before/::after  → HTMLを触らずにコンテンツを追加する疑似要素
 ============================================*/
 *,*::before,*::after{
   box-sizing: border-box;
@@ -14,168 +13,67 @@ CSSの一般的な並べ方の考え方は「大きい・土台 → 小さい・
 body{
   margin:0;
   font-family:sans-serif;
-  background:#f5f8ff;
+  background:linear-gradient(135deg,#ffd6e8 0%,#e6dcff 50%,#cfe3ff 100%) fixed;
   color:#333;
 }
 
-button {
-  cursor: pointer;
-  border: none;
-  padding: 4px 10px;
-  border-radius: 4px;
+.sidebar{
+  width:200px;
+  flex-shrink:0;          /* 幅が縮まないようにする */
+  position:sticky;
+  top:0;
+  height:100vh;
+  background:linear-gradient(180deg,rgba(255,255,255,.9) 60%,#c9a8f5 100%);
 }
 
 /*============================================
   2.レイアウト大枠
 ============================================*/
 
-header{
-  display:flex;
+/* ロゴ：ピンクのネオン風 */
+.logo{
+  font-size:28px;
+  font-weight:bold;
+  color:#ff6fa5;
+  text-shadow:0 0 12px #ff6fa5;
+}
+
+/* カード：半透明＋角丸 */
+.card{
+  background:rgba(255,255,255,.85);
+  border-radius:16px;
+}
+
+/* スライドショー画像：枠いっぱいに表示 */
+.hero-img{
+  width:100%;
+  height:320px;
+  object-fit:cover;
+}
+
   /*
+  写真のブロックの配置の仕方
   display:block 縦に積む基本レイアウト
   display:flex 横・縦並びにする柔軟レイアウト(再頻出)
 
-  */
-  justify-content:space-between;
-  /*
+  gridの操作
+  display:grid;　Gridレイアウトを使う宣言
   justfy-content：flex,gridの子要素(flex/grid)の並べ方を指定。space-betweenを値にとると両端固定の均等配置が出来る。
-  */
-  align-items:center;
-  /*
-  align-items:justify-contentの垂直方向版。
-  */
-  padding:20px;
-  position: sticky;
-  top:0;
-  background: #f5f8ff;
-  z-index: 100;
-
-}
-
-section{
-  padding:60px;
-}
-footer{
-  text-align:center;
-  /*
-  text-align:テキストの水平方向の揃え方を指定
-  ※justify-contentは子要素の揃え方を指定するが、text-alignは文章の揃え方を指定
-  */
-  padding:30px;
-}
-
-/*============================================
-  3.ナビゲーション
-============================================*/
-.logo{
-  font-size:24px;
-}
-
-nav li{
-  margin-left:20px;
-}
-
-/*>は子結合子 */
-nav > ul {
-  display:flex;
-  gap:20px;
-  /*
+  align-items:justify-contentの垂直方向版
   gap:grip/flexコンテナで子要素同士の隙間を指定するプロパティ
-  */
-  list-style:none;  /*list-style:noneはリスクのマーカーを消す*/
-}
 
-nav a{
-  text-decoration:underline;
-  color: blue;
-  transition: color 0.3s ease;
-  /*
+  text-align:テキストの水平方向の揃え方を指定
+  ※justify-contentは子要素の揃え方を指定する
+  ※text-alignは文章の揃え方を指定
+
   transition:変化をなめらかにする
   値が変わるときにアニメーションをつけるプロパティ
   */
-}
 
 /*============================================
-
-  4.セクション・コンテンツ
-============================================*/
-
-h2{
-  text-align:center;
-  margin-bottom:40px;
-}
-
-/*隣接兄弟結合子(+):h2と同一の親要素をもつh3(1つだけ)をセレクト*/
-h2+h3{
-  text-align: center;
-  color: #555;
-  font-size: 14px;
-  margin-bottom: 24px;
-}
-
-/*一般兄弟結合子(~):#input_form以降の"全h2"をセレクト
-    登録フォームより後ろのセクション見出しだけ色を変える例
-*/
-#input_form ~ h2 {
-  border-bottom: 2px solid #aac4ff;
-  padding-bottom:8px;
-}
-
-.hero img{
-  width:100%;
-  height:400px;
-object-fit: contain;
-}
-/* object-fit: cover;  画像の表示方法を調整（画像の比率を保ったまま枠いっぱいに表示する（はみ出る部分は切り取る）） */
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:20px;
-}
-/*
-display:grid;　Gridレイアウトを使う宣言
-grid-template-columns: repeat(4,1fr);　4列のグリッドを作る（全部同じ幅）
-fr = fraction余ったスペースを分割
-*/
-
-.grid img{
-  width:100%;
-  border-radius:10px;
-  transition: transform 0.3s ease;
-}
-
-.grid img:hover{
-  transform: scale(1.05);
-}
-
-/*============================================
-  5.テーブル
-============================================*/
-
-table{
-  width:100%;
-  border-collapse: collapse;  /*セルの境界線を1本にまとめる*/
-  margin-top:20px;
-}
-
-/*============================================
-  6.フォーム・ボタン
-============================================*/
-
-button{
-  cursor: pointer;
-  border:none;
-  border: none;
-  padding: 4px 10px;
-  border-radius: 4px;
-}
-
-/*============================================
-  7.状態・装飾(疑似クラス)
+  状態・装飾(疑似クラス)
 　ホバー：ナビリンクにアンダーラインON/OFFを逆転させる
-　多分これでカーソルあてたときアンダーラインや文字の色変わっている
-
+　カーソルあてたときアンダーラインや文字の色変わっている
 ============================================*/
 
 
