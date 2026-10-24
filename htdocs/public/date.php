@@ -13,7 +13,7 @@ $ctrl->handleRequest($_POST, $_FILES);
 
 $datemeals = [];
 if (isset($_GET['from'], $_GET['to'])) {
-    $datemeals = $repo->findByDateRange($_GET['from'], $_GET['to']);
+    $datemeals = $repo->findByDateRange($_GET['from'], $_GET['to'])??[];
 };
 
 ?>

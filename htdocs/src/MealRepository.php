@@ -82,7 +82,7 @@ Class MealRepository implements MealRepositoryInterface
         return $stmt->fetch(\PDO::FETCH_ASSOC) ?: null;
         }
 
-    public function findByDateRange(string $from,string $to):array{
+    public function findByDateRange(string $from,string $to):array|null{
         if(isset($from)&& $to);
         try{
             $stmt = $this->dbh->prepare(
@@ -96,6 +96,7 @@ Class MealRepository implements MealRepositoryInterface
             return $stmt->fetchAll(\PDO::FETCH_ASSOC) ?: null;
         }catch(PDOException $e){
             echo $e->getMessage();
+            return null;
         }
     }
 

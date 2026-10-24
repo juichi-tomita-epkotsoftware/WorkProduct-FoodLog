@@ -6,7 +6,6 @@ use App\Repository\MealRepository;
 class MealController
 //リクエストを適切な関数へルーティング
 {
-    //コンストラクタ    $repoと$uploderを自身の関数として使えるようにしておく。
     public function __construct(
         private MealRepository $repo,
         private ImageUploader $uploder
