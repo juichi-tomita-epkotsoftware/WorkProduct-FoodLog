@@ -2,18 +2,28 @@
 error_reporting(-1);
 require_once __DIR__ . '/../bootstrap.php';
 $meals =[];
-$meals = $repo->getActive();
 
 $ctrl->handleRequest($_POST, $_FILES);
 prg('index.php');
 
+//検索あればgetSearchedへ。無ければgetActiveへ
+$keyword = trim($_GET['search']??'');
+if($keyword !== ''){
+  $meals = $repo->getSearched($keyword);
+}else{
+  $meals = $repo->getActive();
+}
 
 require_once __DIR__ . '/../views/header.php';
 ?>
 
-<!-- 検索 -->
+<!-- 検索画面+今日の日付 -->
 <div class="d-flex justify-content-between align-items-center mb-4">
-  <input type="search" class="form-control rounded-pill w-50" placeholder="食事名で検索…">
+  <form class="input-group w-50" action="" method="get">
+    <input type="text" name="search" class="form-control rounded-start-pill" value="<?php html($keyword) ?>" placeholder="食事名で検索…">
+    <button type="submit" class="btn btn-outline-secondary bg-white rounded-end-pill px-4">検索</button>
+  </form>
+
   <span class="badge rounded-pill text-bg-light fs-6 px-3 py-2">📅 <?= date('Y.m.d') ?></span>
 </div>
 
@@ -30,8 +40,7 @@ require_once __DIR__ . '/../views/header.php';
 
     <section class="card border-0 shadow-sm">
       <div class="card-body">
-        <h2 class="h6 mb-3">🔥 カロリー目標</h2>
-        <p class="fs-4 fw-bold mb-1">1,248 <small class="fs-6 text-muted">/ 1,800 kcal</small></p>
+        <h2 class="h6 mb-3">🔥 目標食費</h2>
         <div class="progress" role="progressbar">
           <div class="progress-bar bg-danger" style="width:69%"></div>
         </div>
@@ -40,7 +49,7 @@ require_once __DIR__ . '/../views/header.php';
 
     <section class="card border-0 shadow-sm">
       <div class="card-body">
-        <h2 class="h6 mb-3">⭐ よく食べるもの</h2>
+        <h2 class="h6 mb-3">⭐ AI分析</h2>
         <div class="d-flex justify-content-around text-center small">
         </div>
       </div>
@@ -48,11 +57,11 @@ require_once __DIR__ . '/../views/header.php';
 
   </div>
 
-  <!-- 中央：食事データ -->
+  <!-- 右となり：食事データ -->
   <div class="col-lg-8">
     <section class="card border-0 shadow-sm h-100">
       <div class="card-body">
-        <h2 class="h6 mb-3">🍴 食事データ</h2>
+        <h2 class="h6 mb-3">🍴 食事データ(一覧)</h2>
 
         <table class="table table-hover align-middle small">
           <thead>

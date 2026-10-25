@@ -4,7 +4,6 @@ use App\Src\Logger;
 use App\Repository\MealRepository;
 
 class MealController
-//リクエストを適切な関数へルーティング
 {
     public function __construct(
         private MealRepository $repo,

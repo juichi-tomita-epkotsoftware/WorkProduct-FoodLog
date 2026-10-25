@@ -16,7 +16,16 @@ Class MealRepository implements MealRepositoryInterface
     /**一覧取得（論理削除されていないもの） */
     public  function getActive():array
     {
-        $stmt = $this->dbh->query('SELECT * FROM meals WHERE is_deleted IS NULL');
+        $stmt = $this->dbh->query('SELECT * FROM meals WHERE is_deleted IS NULL ORDER BY meal_date DESC');
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public  function getSearched(string $keyword):array|null
+    //クエリ内では変数の直接の埋め込みは不可
+    {
+        $stmt = $this->dbh->prepare('SELECT * FROM meals WHERE meal_name LIKE :keyword AND is_deleted IS NULL');
+        $stmt->bindValue(':keyword', '%' . $keyword . '%', \PDO::PARAM_STR);
+        $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 

@@ -3,7 +3,7 @@
 Class ImageUploader
 {
     private string $uploadDir;  //サーバ上の絶対パス(OSから見たファイルの実際の場所)
-    private string $publicPath; //Web航海用の相対パス(ブラウザからアクセスする際のURL用)
+    private string $publicPath; //Web公開用の相対パス(ブラウザからアクセスする際のURL用)
 
     public function __construct(
         string $uploadDir = '/var/www/html/uploads',
@@ -11,14 +11,8 @@ Class ImageUploader
     ){
         $this->uploadDir = $uploadDir;
         $this->publicPath = $publicPath;
-
     }
 
-    /**
-     * upload()：アップロード処理
-     * PHPでファイルアップロードをすると、$_FILES['input名'] という配列が自動で作られる。
-     * それを渡す想定
-     */
     public function upload(array $file):?string
     {
         if(empty($file['name'])){
@@ -26,10 +20,8 @@ Class ImageUploader
         }
 
         $fileName = basename($file['name']);
-        //basename()がパス文字列からファイル名だけを取り出す関数
-        //XSS対策で悪意あるパスが来た時に意図しない場所への書き込みを防ぐ。
+        //basename()：ファイルパスからファイル名だけを取り出す関数
         $savePath = $this ->uploadDir . '/' .$fileName;
-        //$savePathは、ファイル保存先のフルパス
 
         if (!move_uploaded_file($file['tmp_name'],$savePath)){
             //move_uoloaded_file：HTTPアップロードで受け取った一時ファイルを指定場所へ移動

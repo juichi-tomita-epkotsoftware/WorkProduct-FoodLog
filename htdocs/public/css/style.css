@@ -1,10 +1,4 @@
 
-/*============================================
-CSSの一般的な並べ方の考え方は「大きい・土台 → 小さい・詳細」の順
-
-  １．リセット・ベース：これ書かないと要素が想定より大きくなるバグが起きやすい
-
-============================================*/
 *,*::before,*::after{
   box-sizing: border-box;
   /*widthやheightをpadding・borderを含めたサイズにする*/
@@ -13,7 +7,8 @@ CSSの一般的な並べ方の考え方は「大きい・土台 → 小さい・
 body{
   margin:0;
   font-family:sans-serif;
-  background:linear-gradient(135deg,#ffd6e8 0%,#e6dcff 50%,#cfe3ff 100%) fixed;
+  background:#B3DBEA;
+  /* background:linear-gradient(135deg,#ffd6e8 0%,#e6dcff 50%,#cfe3ff 100%) fixed; */
   color:#333;
 }
 
@@ -23,7 +18,7 @@ body{
   position:sticky;
   top:0;
   height:100vh;
-  background:linear-gradient(180deg,rgba(255,255,255,.9) 60%,#c9a8f5 100%);
+  background:#fff;
 }
 
 /*============================================
@@ -34,13 +29,12 @@ body{
 .logo{
   font-size:28px;
   font-weight:bold;
-  color:#ff6fa5;
-  text-shadow:0 0 12px #ff6fa5;
+  color:#0E3E8F;
 }
 
 /* カード：半透明＋角丸 */
 .card{
-  background:rgba(255,255,255,.85);
+  background:#fff;
   border-radius:16px;
 }
 
@@ -81,3 +75,86 @@ nav a:hover{
   text-decoration: none;
   color: #3366cc;
 }
+
+    .meal-detail {
+        max-width: 800px;
+        margin: 32px auto;
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, .10);
+        overflow: hidden;
+        font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+    }
+    .meal-detail__image {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        display: block;
+        background: #f1f1f1;
+    }
+    .meal-detail__noimage {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #f6f6f6, #e9e9e9);
+        color: #aaa;
+        font-size: 14px;
+    }
+    .meal-detail__body {
+        padding: 24px 28px 28px;
+    }
+    .meal-detail__date {
+        margin: 0 0 4px;
+        font-size: 12px;
+        color: #999;
+    }
+    .meal-detail__title {
+        margin: 0 0 16px;
+        font-size: 24px;
+        color: #333;
+    }
+    .meal-detail__badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+    .meal-detail__badge {
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-weight: bold;
+        font-size: 15px;
+    }
+    .meal-detail__badge small {
+        font-weight: normal;
+        font-size: 11px;
+        margin-right: 6px;
+    }
+    .meal-detail__badge--cost { background: #fff4e5; color: #d9730d; }
+    .meal-detail__badge--time { background: #e8f3ff; color: #1d6fc4; }
+    .meal-detail__badge--meal { background: #eaf7ec; color: #2e8b4a; }
+    .meal-detail__comment {
+        margin: 0;
+        padding: 14px 16px;
+        background: #fafafa;
+        border-left: 4px solid #e5e7eb;
+        border-radius: 6px;
+        color: #555;
+        font-size: 14px;
+        line-height: 1.7;
+        white-space: pre-wrap;
+    }
+    .meal-detail__back {
+        display: inline-block;
+        margin-top: 28px;
+        padding: 10px 20px;
+        border-radius: 8px;
+        background: #f3f4f6;
+        color: #444;
+        text-decoration: none;
+        font-size: 14px;
+        transition: background .2s;
+    }
+    .meal-detail__back:hover { background: #e5e7eb; }

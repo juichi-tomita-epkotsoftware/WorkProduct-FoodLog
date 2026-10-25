@@ -63,7 +63,6 @@ require_once __DIR__ . '/../views/header.php';
                 <input type="file" name="inputImage" accept="image/*">
                 <br>
 
-                <br>登録START<br>
                 <input type="submit" value="登録">
                 <br>
 
